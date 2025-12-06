@@ -745,6 +745,6 @@ endIf
 
 ## Additional Resources
 
-- See [SexLabThreadHook.psc](../environment-setup/) for blocking hook implementation
-- See [SLSB Scene Format](/slsb/converting-animations/) for animation definitions
+- See [SexLabThreadHook.psc](https://github.com/Scrab-NSFW/SexLab/blob/animation/Source/Scripts/SexLabThreadHook.psc) for blocking hook implementation
+- See [Converting Animations](/slsb/converting-animations/) for animation definitions
 - Visit the [Discord](https://discord.gg/JPSHb4ebqj) for API support

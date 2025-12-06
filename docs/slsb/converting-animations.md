@@ -10,194 +10,170 @@ How to convert SLAL animation packs to SLSB format for SexLab P+.
 
 ---
 
-## Overview
+## Quick Start
 
-Converting SLAL packs to SLSB involves:
+To convert SLAL packs quickly:
 
-1. Extracting animation data from SLAL source files
-2. Converting to JSON format
-3. Compiling JSON to `.slr` (SexLab Registry) files using SLSB
-4. Packaging for distribution
-
-There are tools available to automate most of this process.
-
----
-
-## Prerequisites
-
-Before you start, you'll need:
-
-- The original SLAL animation pack
-- Python 3.8+ (for the conversion script)
-- Basic understanding of the command line
-- The SLSB conversion tools
-
----
-
-## Quick Conversion Guide
-
-### Step 1: Get the Tools
-
-Download the conversion tools from:
-- [Discord #slsb-and-pack-dev channel](https://discord.gg/JPSHb4ebqj)
-- [MissCorruption's Tutorial](https://gist.github.com/MissCorruption/fc62e0b46e3652ad6a85fe903a6a9b37)
-
-### Step 2: Locate SLAL Source
-
-Find the SLAL source file for your animation pack. It's usually at:
-```
-Data/Source/Scripts/SLAL_PackName.psc
-```
-
-### Step 3: Run the Converter
-
-```bash
-python slsb_convert.py SLAL_PackName.psc -o output/
-```
-
-### Step 4: Compile with SLSB
-
-Run the SLSB tool to compile your JSON into `.slr` files:
-```bash
-slsb build PackName.json -o Data/SKSE/Plugins/SexLabRegistry/
-```
-
-This generates `PackName.slr` which P+ will load.
-
-### Step 5: Verify Output
-
-Check the generated `.slr` files in the output directory:
-```
-Data/SKSE/Plugins/SexLabRegistry/PackName.slr
-```
-
-### Step 6: Test
-
-1. Install the original SLAL pack (for meshes)
-2. Install your compiled `.slr` files
-3. Start the game and verify animations appear
+1. Set up your development environment (see [Environment Setup](../environment-setup/))
+2. Place SLAL packs in `SLAL_Packs/` folder with correct structure
+3. Run `execute_convert_full.cmd`
+4. Collect converted `.slr` files from `SLSB_Outputs/`
+5. Package and distribute
 
 ---
 
 ## Detailed Conversion Process
 
-### Understanding SLAL Structure
+### Prerequisites
 
-An SLAL pack typically contains:
+Before starting, ensure you have:
+- The SLSB.Convert.Dev.Essentials downloaded and extracted
+- All FNIS tools installed (see [Environment Setup](../environment-setup/))
+- Latest hashes from `Automated.SLSB.Conversions` in `updated_slsb_jsons/`
+- SLAL packs to convert in `SLAL_Packs/` folder
+
+### Step 1: Organize Your Packs
+
+Place SLAL packs in the `SLAL_Packs/` folder with the required structure:
+
+```
+SLAL_Packs/
+├── BillyyCreatures/
+│   └── SLAnims/
+│       └── json/
+│           ├── BillyyCreatures.json
+│           └── [other animation files]
+├── AnimationsByLeito/
+│   └── SLAnims/
+│       └── json/
+│           └── AnimationsByLeito.json
+└── [other packs]/
+    └── SLAnims/
+        └── json/
+```
+
+**Important:** Structure must be `PackName/SLAnims/json/` or the converter won't find the files.
+
+### Step 2: Run the Batch Converter
+
+#### Windows
+1. Open File Explorer to your dev environment
+2. Double-click `execute_convert_full.cmd`
+3. The script runs automatically and processes all packs
+
+#### Linux/Mac
+```bash
+cd /path/to/dev/env
+python convert.py SLAL_Packs/ -o SLSB_Outputs/
+```
+
+### Step 3: Collect Output Files
+
+After conversion completes, your `.slr` files are in `SLSB_Outputs/`:
+
+```
+SLSB_Outputs/
+├── BillyyCreatures.slr
+├── AnimationsByLeito.slr
+├── [other converted packs].slr
+└── manifest.txt              # Conversion report
+```
+
+### Step 4: Package for Users
+
+Create a mod folder for distribution:
+
+```
+MyPack_SLSB_Conversion/
+└── Data/
+    └── SKSE/
+        └── Plugins/
+            └── SexLabRegistry/
+                └── [PackName].slr
+```
+
+Users install this on top of the original SLAL pack (for meshes/assets).
+
+---
+
+## Understanding SLAL Structure
+
+An SLAL pack contains both animation definitions and compiled registration scripts:
 
 ```
 MyAnimPack/
-├── meshes/
+├── meshes/                         # Animation files
 │   └── actors/
 │       └── character/
 │           └── animations/
 │               └── MyAnims/
 │                   ├── anim001_s1_a0.hkx
 │                   ├── anim001_s1_a1.hkx
-│                   └── ...
-├── Source/
-│   └── Scripts/
-│       └── SLAL_MyAnimPack.psc
-└── scripts/
+│                   └── [animation files]
+├── Source/Scripts/                 # Papyrus source (for reference)
+│   └── SLAL_MyAnimPack.psc
+└── scripts/                        # Compiled Papyrus (old system)
     └── SLAL_MyAnimPack.pex
 ```
 
-### Key Data to Extract
+For conversion, we need the JSON definitions that come from the pack's animation definitions.
 
-From each animation definition:
-- **Name** - Display name
-- **ID** - Unique identifier
-- **Tags** - Categories (Aggressive, Loving, etc.)
-- **Actor count** - Number of participants
-- **Gender tags** - Actor genders
+### What Gets Converted
+
+The converter extracts:
+- **Animation names and IDs** - Display name and unique identifier
+- **Gender/race tags** - Actor requirements (male, female, creature, etc.)
+- **Interaction types** - Vaginal, anal, oral, etc.
+- **Animation stages** - Which .hkx files play and timing
+- **Actor positions** - Offsets and rotations for each participant
 - **Creature info** - Race keys for creature animations
-- **Stage data** - Animation file references per stage
-- **Positioning** - Actor positions and rotations
-
-### SLSB Output Format
-
-The converter produces JSON files like:
-
-```json
-{
-  "animations": [
-    {
-      "name": "Animation Display Name",
-      "id": "UniqueAnimID",
-      "tags": ["Tag1", "Tag2", "Tag3"],
-      "sound": "default",
-      "actors": [
-        {
-          "gender": "male",
-          "race": "human",
-          "add_cum": 0
-        },
-        {
-          "gender": "female",
-          "race": "human",
-          "add_cum": 1
-        }
-      ],
-      "stages": [
-        {
-          "id": "stage1",
-          "timer": 30.0,
-          "tags": [],
-          "positions": [
-            {
-              "event": "anim_s1_a0",
-              "offset": [0.0, 0.0, 0.0, 0.0]
-            },
-            {
-              "event": "anim_s1_a1",
-              "offset": [0.0, 50.0, 0.0, 180.0]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
+- **Tags/categories** - Aggressive, Loving, Foreplay, etc.
 
 ---
 
 ## Manual Adjustments
 
-Sometimes automated conversion needs manual fixes:
+After conversion, you may need to make manual adjustments to the JSON or compiled `.slr` files.
 
-### Common Issues
+### Common Adjustments
 
 | Issue | Solution |
 |-------|----------|
-| Missing tags | Add tags manually to JSON |
-| Wrong positions | Adjust offset values |
-| Stage timing | Modify timer values |
-| Incorrect genders | Fix gender fields |
+| Wrong animation tags | Edit JSON before recompiling |
+| Incorrect gender tags | Update actor definitions |
+| Timing issues | Adjust stage timer values |
+| Missing interaction types | Add appropriate tags |
+| Position offsets wrong | Manually adjust offset arrays |
 
-### Tag Guidelines
+### When to Adjust
 
-Common tags for proper categorization:
+Most conversions work automatically, but you may need to adjust for:
+- Animations with non-standard gender combinations
+- Creature animations with unusual race pairings
+- Packs with missing metadata
+- Legacy packs with incomplete definitions
 
-| Tag | Meaning |
-|-----|---------|
-| Aggressive | Non-consensual theme |
-| Loving | Romantic/gentle |
-| Oral | Oral interaction |
-| Anal | Anal interaction |
-| Vaginal | Vaginal interaction |
-| Masturbation | Solo activity |
-| Foreplay | Non-penetrative |
-| FF, MF, MM | Gender combination |
+### Testing Adjustments
+
+After editing JSON:
+1. Re-run the converter to compile updated JSON
+2. Install the new `.slr` file
+3. Launch game and verify animations appear correctly
+4. Test with MatchMaker or console commands
 
 ---
 
 ## Creature Animations
 
-Creature animations need additional data:
+Creature animation conversions require additional metadata for proper race matching.
+
+### Creature Animation JSON Structure
 
 ```json
 {
+  "name": "Creature Animation Name",
+  "id": "creature_anim_id",
+  "tags": ["Aggressive", "Creature"],
   "actors": [
     {
       "gender": "female",
@@ -205,44 +181,104 @@ Creature animations need additional data:
     },
     {
       "gender": "creature",
-      "race": "wolf",
+      "race": "Wolf",
       "race_key": "Wolves"
     }
-  ]
+  ],
+  "stages": [...]
 }
 ```
 
-### Race Keys
+### Common Race Keys
 
-Common race keys:
-- `Wolves` - Wolves, dogs
-- `Bears` - Bears
-- `Trolls` - Trolls
-- `Giants` - Giants
-- `Spiders` - Frostbite spiders
-- `Draugrs` - Draugr
-- `Falmer` - Falmer
-- `Rieklings` - Rieklings
-- `Dragons` - Dragons
+When adding creature actors, use the correct `race_key`:
+
+| Race | race_key | Examples |
+|------|----------|----------|
+| Canines | `Wolves` | Wolves, Dogs, Huskies |
+| Bears | `Bears` | Black Bears, Cave Bears |
+| Trolls | `Trolls` | Trolls, Ice Trolls |
+| Giants | `Giants` | Giants |
+| Spiders | `Spiders` | Frostbite Spiders, Giant Spiders |
+| Draugr | `Draugrs` | Draugr, Draugr Lords |
+| Falmer | `Falmer` | Falmer, Falmer Gloomstalkers |
+| Dragons | `Dragons` | Dragons, Alduin |
+
+### Human + Creature Format
+
+For animations with both human and creature actors:
+
+```json
+"actors": [
+  {
+    "gender": "female",
+    "race": "human"        // Human doesn't need race_key
+  },
+  {
+    "gender": "creature",
+    "race": "Wolf",
+    "race_key": "Wolves"   // Creature needs both race and race_key
+  }
+]
+```
 
 ---
 
 ## Testing Your Conversion
 
-### Quick Test
+### Pre-Test Verification
 
-1. Start a new game (or use a test save)
-2. Open console (`~`)
-3. Check for your animations in the SL MCM
-4. Try starting a scene with your animations
+Before testing in-game, verify your conversion:
 
-### Debugging
+1. Check output folder has `.slr` files created
+2. Verify manifest shows no errors
+3. Ensure output files are not empty (check file size > 1KB)
+
+### In-Game Testing
+
+1. Install the original SLAL pack (for mesh files)
+2. Install your converted `.slr` files in `Data/SKSE/Plugins/SexLabRegistry/`
+3. Launch game and load a save
+4. Open SexLab MCM → Registrations
+5. Check if your animations appear in the list
+
+### Testing with MatchMaker
+
+Use the MatchMaker tool to test animations without manual setup:
+
+1. Open SexLab MCM
+2. Go to MatchMaker
+3. Select your animation pack
+4. Choose actors and let MatchMaker start the scene
+5. Verify animation plays correctly
+
+### Debugging Failed Conversions
 
 If animations don't appear:
-- Check JSON syntax before compiling (use a JSON validator)
-- Verify `.slr` file location (`Data/SKSE/Plugins/SexLabRegistry/`)
-- Check Papyrus logs for errors
-- Ensure mesh files (.hkx) are in correct location
+
+| Issue | Check |
+|-------|-------|
+| `.slr` file not created | Verify SLAL_Packs folder structure |
+| Manifest shows errors | Check FNIS tools are installed |
+| No animations in MCM | Verify `Data/SKSE/Plugins/SexLabRegistry/` path |
+| Animations crash | Check actor/creature count matches animation |
+| Wrong animation plays | Verify JSON wasn't manually edited incorrectly |
+
+### Papyrus Logging
+
+For detailed debugging:
+
+1. Edit `skyrim.ini`:
+   ```ini
+   [Papyrus]
+   bEnableLogging=1
+   bEnableTrace=1
+   ```
+
+2. Check logs at:
+   ```
+   Documents/My Games/Skyrim Special Edition/Logs/Script/
+   ```
 
 ---
 

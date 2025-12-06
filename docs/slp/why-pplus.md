@@ -6,64 +6,23 @@ permalink: /slp/why-pplus/
 
 # Why Choose SexLab P+?
 
-Already using vanilla SexLab and wondering why you should switch? This guide explains the improvements and answers common migration concerns.
+Already using vanilla SexLab and wondering why you should switch? This guide explains the practical improvements and answers common migration concerns.
 
 ---
 
-## The Problems with Vanilla SexLab
+## Quick Comparison
 
-Vanilla SexLab, while revolutionary for its time, has significant limitations:
+For a detailed feature-by-feature comparison, see [Feature Comparison](../comparison/).
 
-### Performance Issues
-- **Slow animation registration** - Loading animations takes a long time
-- **Scene startup delays** - Noticeable pauses when starting scenes
-- **Script lag** - Heavy Papyrus load during scenes
+### The Main Differences
 
-### Technical Limitations
-- **1000 animation cap** - Can't register more than 1000 human + 1000 creature animations
-- **Manual registration** - Must register animations through MCM each game
-- **Settings tied to saves** - MCM settings don't persist across saves
-
-### Maintenance
-- **Requires addon mods** - Need SLSO, SLAS, etc. for common features
-- **Outdated codebase** - Harder for mod authors to work with
-
----
-
-## What P+ Fixes
-
-### Improved Performance
-
-| Operation | Vanilla SL | SexLab P+ |
-|-----------|-----------|-----------|
-| Animation Registration | Minutes | Near-instant |
-| Scene Startup | Noticeable delay | Immediate |
-| Animation Search | Slow | Extremely fast |
-
-P+ completely rewrites the registration and animation systems for modern performance.
-
-### Unlimited Animations
-
-P+ removes the animation limit by itself. The only limit is Skyrim's engine.
-
-> **Note:** Mods using the legacy API (sslBaseAnimation) are still limited to accessing the first 1000 animations. Most modern mods work with the full library.
-
-### Automatic Everything
-
-- **Auto-registration** - Animations register at game startup, no MCM clicking
-- **Persistent settings** - MCM configuration is save-agnostic and auto-loads
-- **No maintenance** - Set it up once, forget about it
-
-### Built-in Features
-
-P+ includes functionality that previously required separate mods:
-
-| Built Into P+ | Previously Required |
-|---------------|---------------------|
-| Separate Orgasm logic | SLSO |
-| Fast animation search | SLAS |
-| Grass clipping fix | SLGP |
-| Smooth expressions | SL Smooth Expressions |
+| Aspect | Vanilla SL | SLP+ |
+|--------|-----------|------|
+| **Animation Registration** | Manual in MCM, ~5-10 min per pack | Automatic at startup, instant |
+| **Animation Limit** | 1000 human + 1000 creature | Unlimited |
+| **Settings Persistence** | Per-save only | Save-agnostic (auto-loads all saves) |
+| **Required Addon Mods** | SLSO, SLAS, SLGP, etc. | Built-in equivalents |
+| **Setup Effort** | High (configure each save) | Low (configure once) |
 
 ---
 
@@ -71,33 +30,94 @@ P+ includes functionality that previously required separate mods:
 
 ### "My current setup works fine"
 
-It probably does! But you may not realize what you're missing:
+It probably does! But you may be missing benefits:
 
-- You might be experiencing script lag you've normalized
-- Your animation slots might be nearly full
-- You're maintaining multiple mods that P+ consolidates
+- **Automation** - No more MCM registration clicking per save
+- **Settings persistence** - Configure once, apply to all saves automatically
+- **Unlimited content** - More animation packs without technical limits
+- **Less addon dependency** - P+ includes features previously requiring 4+ separate mods
 
 ### "Will my other mods break?"
 
-**Most mods work fine.** P+ maintains backwards compatibility for:
-- Scene detection events
-- API calls for starting scenes
-- Animation tags and filtering
+**Most mods work fine with P+.** Backwards compatibility is maintained for:
+- Scene detection events (HookAnimationStart, HookAnimationEnd, etc.)
+- API calls for starting scenes (StartScene, StartSceneEx, etc.)
+- Animation tag filtering and selection
+- Third-party mod compatibility hooks
 
-See [Incompatible Mods](../incompatible-mods/) for the known exceptions.
+**Exceptions exist** - See [Incompatible Mods](../incompatible-mods/) for specific conflicts and workarounds.
 
 ### "What about my animations?"
 
-Your SLAL packs will need **SLSB conversion patches**. The good news:
-- Most popular packs already have conversions available
-- The conversion process is automated for pack developers
-- You install both the original pack (for meshes) and the conversion patch
+Your SLAL packs work with P+ using **SLSB conversion patches**:
+- **Good news:** Most popular packs already have conversions available
+- **How it works:** Install both the original SLAL pack (for meshes) and the conversion patch (for registration)
+- **Easy:** Just drop files in your mod manager, restart game
+- **Automatic:** No MCM registration needed
+
+See [Animation Packs](../animation-packs/) for available conversions or [Converting Animations](../../slsb/converting-animations/) to create your own.
 
 ### "Will I lose my MCM settings?"
 
-P+ uses a different settings system, so you'll need to reconfigure. However, once set up, your settings are saved to `Settings.yaml` and persist across all saves automatically.
+Yes, you'll need to reconfigure. However:
+- P+ uses a different settings format (`Settings.yaml` instead of `SexLab.ini`)
+- **Better:** Your settings auto-save and persist across all saves automatically
+- **No more setup per save:** Configure once, apply everywhere
+- **Easier:** You won't have to redo settings for each new playthrough
+
+See [Settings Reference](../settings-reference/) for all available options.
+
+### "Is there a risk switching between versions?"
+
+**Low risk if you follow migration steps:**
+
+1. Complete your current playthrough on vanilla (or backup that save)
+2. Create a completely new save after installing P+
+3. Your existing vanilla saves will still work if you reinstall vanilla
+
+We recommend **testing on a new character first** to ensure compatibility with your other mods before committing a main playthrough.
 
 ---
+
+## What P+ Includes (Built-in)
+
+P+ consolidates functionality that previously required separate mods:
+
+| Feature | Vanilla SL | SLP+ | Previously Needed |
+|---------|-----------|------|-------------------|
+| Separate Orgasm System | Manual SLSO mod | Built-in | [SL Separate Orgasm](https://www.loverslab.com/files/file/5929-sexlab-separate-orgasm-se/) |
+| Fast Animation Search | Manual SLAS mod | Made redundant | [SLAS](https://www.loverslab.com/files/file/25350-slas-sexlab-anim-searcher/) |
+| Grass Clipping Fix | Manual SLGP mod | Made redundant | [SLGP](https://www.loverslab.com/files/file/25455-slgp-sexlab-grass-patch/) |
+| Smooth Expressions | Manual mod | Built-in | [SL Smooth Expressions](https://www.loverslab.com/files/file/31585-sexlab-smooth-expressions/) |
+
+---
+
+## Getting Started with P+
+
+Ready to switch? Follow these steps:
+
+1. **Backup your saves** - Always keep backups before major mod changes
+2. **Install P+** - See [Installation](../installation/) guide
+3. **Convert your animations** - Install SLSB conversion patches (or convert them yourself)
+4. **Configure MCM** - Set up your preferences (you only do this once!)
+5. **Test on a new character** - Verify everything works before committing
+
+---
+
+## Still Have Questions?
+
+- **General help** - Check [FAQ](../../faq/)
+- **Technical issues** - See [Troubleshooting](../../troubleshooting/)
+- **Live support** - Join the [Discord](https://discord.gg/JPSHb4ebqj)
+
+---
+
+## See Also
+
+- [Feature Comparison](../comparison/) - Detailed feature-by-feature breakdown
+- [Installation Guide](../installation/) - Step-by-step setup
+- [Incompatible Mods](../incompatible-mods/) - Known conflicts
+
 
 ## What You Gain
 

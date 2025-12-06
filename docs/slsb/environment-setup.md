@@ -14,7 +14,7 @@ Set up your development environment for creating and converting SLSB animation p
 
 ### Python
 
-SLSB conversion tools require Python 3.8 or higher.
+SLSB conversion tools require Python 3.10 or higher.
 
 #### Windows
 
@@ -34,160 +34,109 @@ python --version
 scoop install python
 ```
 
-### Text Editor
-
-You'll need a good text editor for JSON files:
-
-| Editor | Notes |
-|--------|-------|
-| [VS Code](https://code.visualstudio.com/) | Recommended - great JSON support |
-| [Notepad++](https://notepad-plus-plus.org/) | Lightweight alternative |
-| [Sublime Text](https://www.sublimetext.com/) | Fast and feature-rich |
-
-#### VS Code Extensions
-
-Recommended extensions for SLSB development:
-- **JSON Tools** - JSON formatting and validation
-- **Prettier** - Code formatter
-- **Error Lens** - Inline error display
-
----
 
 ## Conversion Tools
 
-### Getting the Tools
+### Getting the Development Essentials
 
-1. Join the [Discord](https://discord.gg/JPSHb4ebqj)
-2. Go to #slsb-and-pack-dev channel
-3. Check pinned messages for the latest tools
+1. Download **SLSB.Convert.Dev.Essentials** from the [Discord](https://discord.gg/JPSHb4ebqj) #slsb-and-pack-dev channel
+2. Extract to a short path without spaces (e.g., `D:/SkyrimMods/SLSB.Convert.Dev.Essentials`)
 
-### Tool Contents
+### Required FNIS Tools
 
-The toolkit typically includes:
+You'll need FNIS tools for animation processing. Download these from Nexus Mods:
 
+1. [FNIS Behavior SE 7.6 XXL](https://www.nexusmods.com/skyrimspecialedition/mods/3038?tab=files&file_id=124620)
+2. [FNIS Creature Pack SE 7.6](https://www.nexusmods.com/skyrimspecialedition/mods/3038?tab=files&file_id=124621)
+3. [Command Line FNIS for Modders](https://www.nexusmods.com/skyrim/mods/81882?tab=files&file_id=1000235248)
+
+### Required SexLab Tools
+
+1. [SexLab AnimStageLabels](https://www.loverslab.com/files/file/27407-sexlab-anim-stage-labels/)
+2. [HentaiRim Tags](https://www.loverslab.com/files/file/43761-hentairim-p/)
+
+### Setting Up Dev Tools
+
+After downloading, extract tools to your dev environment:
+
+1. Extract FNIS Behavior SE → `base_game_replica\Data`
+   - Take the **"tools"** folder from `FNIS Behavior SE 7.6 XXL\Data`
+2. Extract FNIS Creature Pack → `base_game_replica\Data`
+   - Take the **"tools"** folder
+3. Extract Command Line FNIS → `base_game_replica\Data`
+   - Extract the **"tools"** folder
+4. Extract AnimStageLabels → `slate_action_logs`
+   - Take the **"SLATE"** folder contents from `SLAnimStageLabels\SKSE\Plugins`
+5. Extract HentaiRim Tags → `slate_action_logs`
+   - Take the **"SLATE"** folder contents
+
+The dev environment should now look like:
 ```
-slsb-tools/
-├── slsb                    # SLSB compiler (generates .slr files)
-├── slsb_convert.py         # SLAL to JSON conversion script
-├── slsb_validate.py        # JSON validator
-├── templates/              # Template files
-│   ├── animation.json
-│   └── pack.json
-├── examples/               # Example conversions
-└── README.md
-```
-
-### Installing Dependencies
-
-```bash
-cd slsb-tools
-pip install -r requirements.txt
-```
-
-If there's no requirements.txt, the script likely uses only standard library.
-
----
-
-## Project Structure
-
-### Recommended Layout
-
-```
-MyAnimationProject/
-├── source/
-│   └── SLAL_Original.psc    # Original SLAL source (reference)
-├── json/
-│   └── MyPack.json          # Your JSON definitions
-├── output/
+[dev_env]/
+├── base_game_replica/
 │   └── Data/
-│       └── SKSE/
-│           └── Plugins/
-│               └── SexLabRegistry/
-│                   └── MyPack.slr   # Compiled registry
-├── tools/
-│   ├── slsb                 # SLSB compiler
-│   └── slsb_convert.py
-└── README.md
+│       ├── tools/          (from FNIS Behavior)
+│       ├── tools/          (from FNIS Creature)
+│       └── tools/          (from Command Line FNIS)
+├── slate_action_logs/      (animation stage info)
+├── updated_slsb_jsons/     (for hash maintenance)
+├── SLAL_Packs/             (packs to convert)
+├── SLSB_Outputs/           (converted .slr files)
+├── convert.py              (conversion script)
+├── execute_convert_full.cmd
+└── execute_convert_test.cmd
 ```
-
-### Output Structure
-
-Your final package for users should contain:
-```
-Data/
-└── SKSE/
-    └── Plugins/
-        └── SexLabRegistry/
-            └── YourPack.slr
-```
-
-> **Note:** Users only need the compiled `.slr` files. Keep your JSON sources for future edits.
 
 ---
 
 ## Setting Up Your First Conversion
 
-### Step 1: Create Project Folder
+### Step 1: Prepare the Dev Environment
 
-```bash
-mkdir my-slsb-project
-cd my-slsb-project
-mkdir source json output tools
+Extract the downloaded **SLSB.Convert.Dev.Essentials** to a path without spaces:
+
+```
+D:/SkyrimMods/SLSB.Convert.Dev.Essentials/
 ```
 
-### Step 2: Copy Tools
+### Step 2: Add FNIS Tools
 
-Copy the conversion tools to your `tools/` folder.
+Follow the "Required FNIS Tools" section above to add:
+- FNIS Behavior tools
+- FNIS Creature tools  
+- Command Line FNIS
+- AnimStageLabels (slate_action_logs)
+- HentaiRim Tags (slate_action_logs)
 
-### Step 3: Get SLAL Source
+### Step 3: Maintain Animation Hashes
 
-Find the original SLAL source file (`.psc`) and copy to `source/`.
+**Important:** SLSB and SLP+ identify scenes by hash. To prevent users from losing animation toggles and customizations on updates:
 
-Location is usually:
+1. Download the latest `Automated.SLSB.Conversions.v_.7z` from the mod page
+2. Extract and search for `.json` files
+3. Copy all JSON files to `[dev_env]\updated_slsb_jsons/`
+4. The converter will use these hashes for new conversions
+
+This ensures users' saved animation preferences persist across updates.
+
+### Step 4: Convert SLAL Packs
+
+1. Place SLAL packs in `SLAL_Packs/` with proper structure (see Project Structure above)
+2. Run `execute_convert_full.cmd` (Windows) or equivalent script
+3. Wait for conversion to complete
+4. Check `SLSB_Outputs/` for generated `.slr` files
+
+### Step 5: Verify Conversions
+
+The output directory should contain:
 ```
-[Mod]\Data\Source\Scripts\SLAL_PackName.psc
+SLSB_Outputs/
+├── BillyyCreatures.slr
+├── AnimationsByLeito.slr
+└── [other converted packs].slr
 ```
 
-### Step 4: Convert SLAL to JSON
-
-```bash
-python tools/slsb_convert.py source/SLAL_PackName.psc -o json/
-```
-
-### Step 5: Compile JSON to SLR
-
-```bash
-tools/slsb build json/PackName.json -o output/Data/SKSE/Plugins/SexLabRegistry/
-```
-
-This produces the `.slr` file that users will install.
-
----
-
-## JSON Validation
-
-### Using the Validator
-
-```bash
-python slsb_validate.py json/MyPack.json
-```
-
-### Online Validators
-
-You can also use online JSON validators:
-- [JSONLint](https://jsonlint.com/)
-- [JSON Formatter](https://jsonformatter.curiousconcept.com/)
-
-### Common JSON Errors
-
-| Error | Cause | Fix |
-|-------|-------|-----|
-| Unexpected token | Missing comma | Add comma between elements |
-| Unterminated string | Missing quote | Close string with " |
-| Invalid character | Special characters | Escape or remove |
-| Trailing comma | Comma after last item | Remove trailing comma |
-
----
+These `.slr` files are what you distribute to users.
 
 ## Testing Environment
 
@@ -225,58 +174,70 @@ Documents/My Games/Skyrim Special Edition/Logs/Script/
 
 ---
 
-## Version Control
+## Batch Processing Multiple Packs
 
-### Using Git
+### Automated Full Conversion
 
-Recommended for tracking changes:
+The toolkit provides batch scripts to convert multiple SLAL packs at once.
 
-```bash
-git init
-git add .
-git commit -m "Initial conversion"
+#### Windows
+
+Double-click one of:
+- `execute_convert_full.cmd` - Full conversion of all packs in `SLAL_Packs/`
+- `execute_convert_test.cmd` - Test conversion (limited, for verification)
+
+The script will:
+1. Process each pack in `SLAL_Packs/`
+2. Generate JSON in intermediate files
+3. Compile to `.slr` files
+4. Place output in `SLSB_Outputs/`
+5. Report completion and any errors
+
+
+### Monitoring Conversions
+
+While conversion runs, you'll see output like:
+
+```
+Processing: BillyyCreatures...
+  ✓ Extracted animations (342 animations)
+  ✓ Generated JSON
+  ✓ Compiled .slr files
+  
+Processing: AnimationsByLeito...
+  ✓ Extracted animations (156 animations)
+  ✓ Generated JSON
+  ✓ Compiled .slr files
+
+Done! 498 total animations converted.
 ```
 
-### .gitignore
+Check `SLSB_Outputs/` for the `.slr` files.
 
-```gitignore
-# Ignore compiled files
-*.pex
+### Troubleshooting Batch Conversions
 
-# Ignore game files
-*.bsa
-*.hkx
-
-# Ignore personal notes
-notes.txt
-TODO.txt
-```
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Script won't run | File permissions | Right-click → "Run as Administrator" |
+| "Python not found" | Python not in PATH | Install Python with "Add to PATH" checked |
+| Pack not converted | Wrong folder structure | Ensure `SLAL_Packs/PackName/SLAnims/json/` layout |
+| Missing tools | Incomplete FNIS setup | Follow "Required FNIS Tools" section |
+| Empty output | No JSON found | Check source packs contain json/ folder |
 
 ---
 
-## Batch Processing
+## Quick Reference: File Paths
 
-### Converting Multiple Packs
+**Critical paths to remember:**
 
-Create a batch script for multiple packs:
-
-**Windows (batch):**
-```batch
-@echo off
-for %%f in (source\*.psc) do (
-    python tools\slsb_convert.py "%%f" -o output\
-)
-echo Done!
-```
-
-**PowerShell:**
-```powershell
-Get-ChildItem source\*.psc | ForEach-Object {
-    python tools\slsb_convert.py $_.FullName -o output\
-}
-```
-
----
+| File/Folder | Purpose | Example |
+|---|---|---|
+| `SLAL_Packs/` | Input SLAL packs | `SLAL_Packs/BillyyCreatures/SLAnims/json/` |
+| `SLSB_Outputs/` | Output .slr files | `SLSB_Outputs/BillyyCreatures.slr` |
+| `updated_slsb_jsons/` | Hash reference | Copy latest Automated.SLSB.Conversions JSONs here |
+| `base_game_replica/Data/` | FNIS tools | All FNIS tools go here |
+| `slate_action_logs/` | Animation labels | SLATE folder contents from AnimStageLabels & HentaiRim |
+| `convert.py` | Conversion script | Run this with packs in SLAL_Packs/ |
 
 ## Additional Resources
 
