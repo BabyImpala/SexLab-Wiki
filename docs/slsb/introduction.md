@@ -59,10 +59,10 @@ SLSB uses JSON source files that compile to `.slr` registry files:
 ### SLAL Structure (Old)
 ```
 Data/
-└── Source/Scripts/
-    └── SLAL_MyAnimPack.psc      # Papyrus source
-└── Scripts/
-    └── SLAL_MyAnimPack.pex      # Compiled script
+└── SLAnims/json/
+    └── SLAL_MyAnimPack.json      # SLAL json
+└── SLAnims/source/
+    └── SLAL_MyAnimPack.txt       # Source txt
 ```
 
 ### SLSB Structure (New)
