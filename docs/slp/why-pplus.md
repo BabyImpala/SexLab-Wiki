@@ -41,7 +41,7 @@ It probably does! But you may be missing benefits:
 
 **Most mods work fine with P+.** Backwards compatibility is maintained for:
 - Scene detection events (HookAnimationStart, HookAnimationEnd, etc.)
-- API calls for starting scenes (StartScene, StartSceneEx, etc.)
+- API calls for starting scenes (StartSex, StartSexQuick, etc.)
 - Animation tag filtering and selection
 - Third-party mod compatibility hooks
 
@@ -60,7 +60,9 @@ See [Animation Packs](../animation-packs/) for available conversions or [Convert
 ### "Will I lose my MCM settings?"
 
 Yes, you'll need to reconfigure. However:
-- P+ uses a different settings format (`Settings.yaml` instead of `SexLab.ini`)
+- P+ uses a different settings format (`Settings.yaml` *and* `SexLab.ini`)
+    - `Settings.yaml` saves the user's MCM settings
+    - `SexLab.ini` stores the more niche and .dll exclusive settings.
 - **Better:** Your settings auto-save and persist across all saves automatically
 - **No more setup per save:** Configure once, apply everywhere
 - **Easier:** You won't have to redo settings for each new playthrough

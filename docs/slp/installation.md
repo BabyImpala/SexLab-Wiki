@@ -42,7 +42,7 @@ Install these before SexLab P+:
 | [SKSE](https://skse.silverlock.org/) | Match to your Skyrim version |
 | [Address Library](https://www.nexusmods.com/skyrimspecialedition/mods/32444) | Required by many SKSE plugins |
 | [SkyUI](https://www.nexusmods.com/skyrimspecialedition/mods/12604) | For MCM menus |
-| [Mfg Fix NG](https://www.nexusmods.com/skyrimspecialedition/mods/114095) | Required for expressions |
+| [Mfg Fix NG](https://www.nexusmods.com/skyrimspecialedition/mods/133568) | Required for expressions |
 | [BEES](https://www.nexusmods.com/skyrimspecialedition/mods/106441) | Only if on 1.6.640 or lower |
 
 ---
@@ -55,7 +55,7 @@ Install the base SexLab Framework first. This is a precaution as P+ will overwri
 
 ### Step 2: Install Mfg Fix NG
 
-Download and install [Mfg Fix NG](https://www.nexusmods.com/skyrimspecialedition/mods/114095) along with its requirements.
+Download and install [Mfg Fix NG](https://www.nexusmods.com/skyrimspecialedition/mods/133568) along with its requirements.
 
 ### Step 3: Install SexLab P+
 

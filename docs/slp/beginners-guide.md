@@ -35,6 +35,7 @@ SexLab handles the technical complexity of positioning actors, playing animation
 | **Modern Tech** | Uses SLSB instead of SLAL for animations |
 | **Built-in Features** | Includes functionality from SLSO, SLAS, and other addon mods |
 | **Automatic Settings** | MCM settings save to `Settings.yaml` and persist across all saves |
+| **Automatic Installation** | SexLab Patch+ installs on it's own without user input |
 
 ---
 
@@ -47,7 +48,7 @@ Animations are the visual content—the movements actors perform during scenes. 
 Collections of animations bundled together. P+ uses SexLab Scene Builder (SLSB) packs instead of the old SLAL format. Most popular SLAL packs have SLSB conversions available. See [Animation Packs](../animation-packs/) for downloads.
 
 ### Scenes/Threads
-A "scene" or "thread" is an active animation session. P+ can run multiple threads simultaneously.
+A "scene" or "thread" is an active animation session. P+ can run multiple threads simultaneously, up to 15 concurrent animations.
 
 ### Tags
 Animations are categorized using tags (e.g., "Aggressive", "Loving", "Oral"). Mods use these tags to select appropriate animations for different situations.

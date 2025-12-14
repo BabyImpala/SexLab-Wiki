@@ -57,8 +57,8 @@ Settings controlling animation selection scoring. Animations are scored based on
 | `iWeightVampire` | 10 | Score bonus when vampire status matches animation tags. |
 | `iWeightSubmissive` | 20 | Score bonus when submissive trait matches animation requirements. |
 | `iWeightUnconscious` | 10 | Score bonus when conscious state matches animation requirements. |
-| `fScaleTolerance` | 0.1 | Allowed scale deviation from 1.0 for receiving scale bonus. |
-| `iWeightScale` | 10 | Score bonus when actor scale is within tolerance of 1.0. |
+| `fScaleTolerance` | 0.1 | Allowed scale deviation from the expected scale of a position. E.g., if a position expects scale 0.7, a tolerance of 0.1 means actors between 0.6 and 0.8 are eligible for the scale bonus. |
+| `iWeightScale` | 10 | Score bonus when actor scale is within tolerance of the position's expected scale. |
 
 ---
 
@@ -67,62 +67,62 @@ Settings controlling animation selection scoring. Animations are scored based on
 Boolean toggles to enable/disable specific creature races in animations. Set to `false` to prevent a race from being used in scenes.
 
 <details>
-<summary><strong>Click to expand full race list</strong></summary>
+    <summary><strong>Click to expand full race list</strong></summary>
 
-| Setting (Race) |
-|----------------|
-| `bAshHopper` — Ash Hopper |
-| `bLurker` — Lurker |
-| `bBear` — Bear |
-| `bMammoth` — Mammoth |
-| `bBoar` — Boar |
-| `bMudcrab` — Mudcrab |
-| `bBoarMounted` — Mounted Boar |
-| `bNetch` — Netch |
-| `bBoarSingle` — Single Boar |
-| `bRiekling` — Riekling |
-| `bCanine` — Canine (generic) |
-| `bSabrecat` — Sabrecat |
-| `bChaurus` — Chaurus |
-| `bSeeker` — Seeker |
-| `bChaurusHunter` — Chaurus Hunter |
-| `bSkeever` — Skeever |
-| `bChaurusReaper` — Chaurus Reaper |
-| `bSlaughterfish` — Slaughterfish |
-| `bChicken` — Chicken |
-| `bSpider` — Spider |
-| `bCow` — Cow |
-| `bSpriggan` — Spriggan |
-| `bDeer` — Deer |
-| `bStormAtronach` — Storm Atronach |
-| `bDog` — Dog |
-| `bTroll` — Troll |
-| `bDragon` — Dragon |
-| `bVampireLord` — Vampire Lord |
-| `bDragonPriest` — Dragon Priest |
-| `bWerewolf` — Werewolf |
-| `bDraugr` — Draugr |
-| `bWisp` — Wisp |
-| `bDwarvenBallista` — Dwarven Ballista |
-| `bWispmother` — Wispmother |
-| `bDwarvenCenturion` — Dwarven Centurion |
-| `bWolf` — Wolf |
-| `bDwarvenSphere` — Dwarven Sphere |
-| `bDwarvenSpider` — Dwarven Spider |
-| `bFalmer` — Falmer |
-| `bFlameAtronach` — Flame Atronach |
-| `bFox` — Fox |
-| `bFrostAtronach` — Frost Atronach |
-| `bGargoyle` — Gargoyle |
-| `bGiant` — Giant |
-| `bGiantSpider` — Giant Spider |
-| `bGoat` — Goat |
-| `bHagraven` — Hagraven |
-| `bHare` — Hare |
-| `bHorker` — Horker |
-| `bHorse` — Horse |
-| `bIceWraith` — Ice Wraith |
-| `bLargeSpider` — Large Spider |
+    | Setting (Race) |
+    |----------------|
+    | `bAshHopper` — Ash Hopper |
+    | `bLurker` — Lurker |
+    | `bBear` — Bear |
+    | `bMammoth` — Mammoth |
+    | `bBoar` — Boar |
+    | `bMudcrab` — Mudcrab |
+    | `bBoarMounted` — Mounted Boar |
+    | `bNetch` — Netch |
+    | `bBoarSingle` — Single Boar |
+    | `bRiekling` — Riekling |
+    | `bCanine` — Canine (generic) |
+    | `bSabrecat` — Sabrecat |
+    | `bChaurus` — Chaurus |
+    | `bSeeker` — Seeker |
+    | `bChaurusHunter` — Chaurus Hunter |
+    | `bSkeever` — Skeever |
+    | `bChaurusReaper` — Chaurus Reaper |
+    | `bSlaughterfish` — Slaughterfish |
+    | `bChicken` — Chicken |
+    | `bSpider` — Spider |
+    | `bCow` — Cow |
+    | `bSpriggan` — Spriggan |
+    | `bDeer` — Deer |
+    | `bStormAtronach` — Storm Atronach |
+    | `bDog` — Dog |
+    | `bTroll` — Troll |
+    | `bDragon` — Dragon |
+    | `bVampireLord` — Vampire Lord |
+    | `bDragonPriest` — Dragon Priest |
+    | `bWerewolf` — Werewolf |
+    | `bDraugr` — Draugr |
+    | `bWisp` — Wisp |
+    | `bDwarvenBallista` — Dwarven Ballista |
+    | `bWispmother` — Wispmother |
+    | `bDwarvenCenturion` — Dwarven Centurion |
+    | `bWolf` — Wolf |
+    | `bDwarvenSphere` — Dwarven Sphere |
+    | `bDwarvenSpider` — Dwarven Spider |
+    | `bFalmer` — Falmer |
+    | `bFlameAtronach` — Flame Atronach |
+    | `bFox` — Fox |
+    | `bFrostAtronach` — Frost Atronach |
+    | `bGargoyle` — Gargoyle |
+    | `bGiant` — Giant |
+    | `bGiantSpider` — Giant Spider |
+    | `bGoat` — Goat |
+    | `bHagraven` — Hagraven |
+    | `bHare` — Hare |
+    | `bHorker` — Horker |
+    | `bHorse` — Horse |
+    | `bIceWraith` — Ice Wraith |
+    | `bLargeSpider` — Large Spider |
 
 </details>
 

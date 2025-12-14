@@ -40,7 +40,7 @@ Mods that work well with SexLab P+ to enhance your experience.
 |-----|-------------|
 | [SKSE](https://skse.silverlock.org/) | Essential script extender |
 | [SkyUI](https://www.nexusmods.com/skyrimspecialedition/mods/12604) | MCM menu system |
-| [Mfg Fix NG](https://www.nexusmods.com/skyrimspecialedition/mods/114095) | Required for expressions |
+| [Mfg Fix NG](https://www.nexusmods.com/skyrimspecialedition/mods/133568) | Required for expressions |
 | [Address Library](https://www.nexusmods.com/skyrimspecialedition/mods/32444) | Required by SKSE plugins |
 | [PapyrusUtil](https://www.nexusmods.com/skyrimspecialedition/mods/13048) | Required by many mods |
 
