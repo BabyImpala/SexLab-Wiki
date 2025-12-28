@@ -169,7 +169,7 @@ Contextual tags are open-ended—any string can be used. This enables mod-to-mod
 **Example: Seduction System**
 ```papyrus
 ; Mod A: Player seduces a guard to enter a locked room
-SexLab.StartScene(actors, "Loving", akSubmissive = none, \
+SexLabThread thread = SexLab.StartScene(actors, "Loving", akSubmissive = none, \
     akCenter = none, aiFurniture = 1, asHook = "SeductionScene")
 thread.AddContext("Sexual_Seduction")
 
