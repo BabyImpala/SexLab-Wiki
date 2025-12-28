@@ -106,7 +106,7 @@ The converter automatically extracts:
 - **Animation stages** - Which .hkx files play and timing/impact sound
 - **Actor offsets** - Offsets and rotations for each participant
 - **Scene parameters** - Stage timers, stage sound, etc.
-- **Tags/categories** - Aggressive, Loving, Foreplay, etc.
+- **Tags/categories** - Aggressive, Loving, Foreplay, etc. See [Tagging Reference](../../slp/tagging-reference/) for official tags.
 - **AnimObjects info** - All AnimObjects are incorporated as-is for each animation event.
 
 ---
@@ -119,7 +119,7 @@ After conversion, you may need to make manual adjustments to the slsb.json and r
 
 | Issue | Solution |
 |-------|----------|
-| Wrong animation tags | Edit JSON before recompiling |
+| Wrong animation tags | Edit JSON before recompiling. Use [official tags](../../slp/tagging-reference/) for best compatibility. |
 | Incorrect gender tags | Update actor definitions |
 | Timing issues | Adjust stage timer values |
 | Missing interaction types | Add appropriate tags |

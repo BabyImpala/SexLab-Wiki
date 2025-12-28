@@ -51,12 +51,13 @@ SexLabThread Function StartScene(Actor[] akPositions, String asTags, Actor akSub
 
 **Parameters:**
 - `akPositions` (Actor[]) - Array of actors to animate (1-5 actors)
-- `asTags` (String) - Requested animation tags, comma-separated
+- `asTags` (String) - Requested animation tags, comma-separated. See [Tagging Reference](../tagging-reference/) for full syntax and official tags.
   - Example: `"Aggressive, Vaginal"`
   - Prefix `~` for OR-conjunctions: `"~Doggy, ~Missionary"` (has either tag)
   - Prefix `-` to exclude: `"-Oral, -Anal"` (does not have these tags)
+  - Prefix `!` for contextual tags: `"!aggressive"` (marks thread, not selection)
   - Example combined: `"~Doggy, ~Missionary, -Rough"` = (Doggy OR Missionary) AND NOT Rough
-- `akSubmissive` (Actor) - Optional: Actor to treat as submissive for context
+- `akSubmissive` (Actor) - Optional: Actor to treat as submissive for positioning (does not imply non-consent; use `!aggressive` context for that)
 - `akCenter` (ObjectReference) - Optional: Position to place actors near
 - `aiFurniture` (int) - Furniture preference: 0 = Disable, 1 = Allow (default), 2 = Prefer
 - `asHook` (String) - Optional: Local hook name for thread-specific events
@@ -180,6 +181,8 @@ int Function GetStageHistoryLength()           ; Number of stages played
 
 ## Tags & Context
 
+For complete tag syntax, prefixes, official tag lists, and contextual tag usage, see the [Tagging Reference](../tagging-reference/).
+
 ### Tag Checking
 
 ```papyrus
@@ -196,9 +199,9 @@ bool Function IsSceneAnal()
 bool Function IsSceneOral()
 ```
 
-### Custom Context
+### Contextual Tags
 
-Custom context tags allow mods to communicate with each other about scene intent.
+Contextual tags mark the thread (not the animation) and allow mod-to-mod communication.
 
 ```papyrus
 bool Function HasContext(String asTag)         ; Does thread own this context?
@@ -211,8 +214,8 @@ Function SetConsent(bool abIsConsent)          ; Set consent status
 
 **Example:**
 ```papyrus
-thread.AddContext("MyMod_Rape")      ; Add custom context
-if thread.HasContext("MyMod_Rape")   ; Check it
+thread.AddContext("MyMod_Seduction") ; Add custom context
+if thread.HasContext("MyMod_Seduction")
   ; React to context
 endIf
 ```

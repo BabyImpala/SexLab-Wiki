@@ -160,7 +160,7 @@ Ideally yes, but the community provides conversions for popular packs.
 
 ### Can animations be tagged differently in SLSB?
 
-Yes, SLSB allows more detailed tagging including per-stage and per-position tags.
+Yes, SLSB allows more detailed tagging including per-stage and per-position tags. See the [Tagging Reference](/slp/tagging-reference/) for official tags and query syntax.
 
 ---
 
