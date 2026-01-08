@@ -106,14 +106,49 @@ See the [Settings Reference](../settings-reference/) for a complete list of tech
 
 Default controls during scenes (may vary based on setup):
 
+> Check your MCM for exact keybindings.
+
+## Global Sexlab Hotkeys
+
 | Key | Action |
 |-----|--------|
-| **Space** | Advance to next stage |
-| **End** | End scene |
-| **+/-** | Adjust speed |
-| **Page Up/Down** | Change animation |
+| **N** | Target Actor for Edit |
+| **NP3** | Toggle Free Camera Mode |
 
-> Check your MCM for exact keybindings.
+## Scene Manipulation Hotkeys (Menu Closed)
+
+| Key | Action |
+|-----|--------|
+| **Space** | Advance to Next Stage |
+| **End** | End Scene |
+| **+/-** | Adjust Speed |
+| **Page Up/Down** | Change Animation |
+
+## Scene Manipulation Hotkeys (Menu Open)
+
+| Key | Action |
+|-----|--------|
+| **E** | Open Menu / Swap Menu Tab |
+| **Space** | Select |
+| **End** | Back / Close Menu |
+| **Up Arrow** | Up |
+| **Down Arrow** | Down |
+| **Left Arrow** | Left |
+| **Right Arrow** | Right |
+| **Shift** | Modifier |
+| **LCtrl** | Inverse Action |
+
+> Menu input fields can be edited manually or with *modifier* + *arrow keys*.
+
+## Enjoyment Minigame Hotkeys
+
+| Key | Action |
+|-----|--------|
+| **Shift** | Alternate Function Modifier Key |
+| **B** | Pause the Enjoyment Game |
+| **Mouse1** | Raise Enjoyment |
+| **Mouse2** | Edge/Holdback |
+| **G** | Cycle to Next Actor in Scene |
 
 ### Understanding Stages
 
